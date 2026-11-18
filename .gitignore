@@ -1,0 +1,11 @@
+bin/
+dist/
+captures/
+sessions/
+*.local.toml
+.DS_Store
+*.dSYM/
+*.kicad_prl
+*-backups/
+fp-info-cache
+~*.lck

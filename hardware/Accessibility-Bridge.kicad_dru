@@ -1,0 +1,4 @@
+(version 1)
+(rule "Separate USB power domains"
+  (condition "(A.NetName == '/CTL_*' && B.NetName == '/TGT_*') || (B.NetName == '/CTL_*' && A.NetName == '/TGT_*')")
+  (constraint clearance (min 6mm)))

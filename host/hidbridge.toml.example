@@ -1,0 +1,63 @@
+# hidbridgectl configuration. Pass with -config; every key has a default, so
+# a file is only needed to describe a target and a capture input.
+# Unknown keys are errors.
+
+[port]
+# The CONTROL port: a device path or a glob that must match exactly one
+# device. Set this when more than one adapter is present.
+#path = "/dev/cu.usbserial-*"          # macOS
+#path = "/dev/serial/by-id/usb-FTDI_*" # Linux
+
+[link]
+# Retransmission, docs/PROTOCOL.md. Change only for bring-up experiments.
+#ack_timeout = "1s"
+#retries = 5
+
+[target]
+# A name for transcripts.
+#name = "target"
+# Desktop size in pixels. `click X Y` takes pixels and scales them onto the
+# absolute pointer's 0..32767 range; multi-display targets map differently
+# per operating system.
+#screen = [1920, 1080]
+# Board-side pause between key transitions when typing, and the default hold
+# of a tapped key. Firmware setup screens may need more.
+#key_interval = "15ms"
+# Board-side time a clicked button stays down.
+#click_hold = "30ms"
+
+[capture]
+# One PNG frame from a network stream or local capture device.
+# See ../docs/CAPTURE.md for two-encoder, USB/Elgato and Blackmagic examples.
+# Save actual device URLs in a *.local.toml file (ignored by Git).
+# Common options:
+#ffmpeg = "ffmpeg"
+#dir = "captures"              # files land in dir/YYYY/MM/DD/
+#timeout = "10s"                # whole snapshot, including connection and decode
+#
+# Network: a URL selects RTSP/RTMP and overrides local device options below.
+# No resizing: the PNG keeps the stream's resolution.
+#url = "rtsp://192.0.2.10:554/STREAM_PATH"
+#url = "rtmp://192.0.2.10/live/STREAM_NAME"
+#rtsp_transport = "tcp"        # default; "udp" for encoders that require it
+#
+# Local USB capture: leave url unset. List macOS devices with:
+#   ffmpeg -f avfoundation -list_devices true -i ""
+#format = "avfoundation"       # "v4l2" on Linux
+#device = "0"                  # avfoundation index or name; /dev/video0 on Linux
+#size = "1920x1080"
+#framerate = 30
+#pixel_format = ""             # some devices need "uyvy422" or "yuyv422"
+#
+# Blackmagic: needs an FFmpeg build with the DeckLink input enabled.
+#   ffmpeg -sources decklink
+#   ffmpeg -f decklink -list_formats 1 -i "DEVICE_NAME"
+#format = "decklink"
+#device = "DEVICE_NAME"        # exact device/port name from -sources
+#format_code = ""              # empty = autodetect; otherwise a listed FourCC
+#pixel_format = ""             # maps to DeckLink's raw_format option
+# size and framerate are ignored for DeckLink; format_code selects the mode.
+
+[session]
+# Transcripts land in dir/YYYY/MM/DD/HHMMSS.nanoseconds-<name>.jsonl.
+#dir = "sessions"

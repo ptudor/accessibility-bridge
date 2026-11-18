@@ -1,0 +1,6 @@
+# In a blank text document, type two words and select the last letter.
+expect usb configured
+type "Accessibility Bridge"
+key shift+left
+sync
+expect held no

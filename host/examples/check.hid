@@ -1,0 +1,14 @@
+# Start with Caps Lock off on a target you can observe.
+expect usb configured
+expect held no
+expect leds caps=off
+key capslock 150ms
+wait 100ms
+expect leds caps=on
+key capslock 150ms
+wait 100ms
+expect leds caps=off
+down shift
+expect held yes
+release
+expect held no
